@@ -32,6 +32,13 @@
       \end{MyBox}
     }
 
+    \newbookcovercomponenttype{shadedBox2}{
+      \begin{MyBox}{BookCoverColor!75!white}{black}
+          #1
+      \end{MyBox}
+    }
+
+
     \newbookcovercomponenttype{center rotate}{
       \vfill
       \centering
@@ -75,7 +82,7 @@
 
 
     %---back----
-    \begin{bookcoverelement}{normal}{back}[2cm,2cm,2cm,2cm]
+    \begin{bookcoverelement}{shadedBox2}{back}[1cm,2cm,1cm,2cm]
       \centering {
       \resizebox{!}{5mm}{\TheTitle}\\[8mm]
       \resizebox{!}{3mm}{\TheSubtitle}\\
