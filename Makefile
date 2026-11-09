@@ -1,4 +1,8 @@
-all: cover.jpg cover1.jpg bc0.pdf bc1.pdf bc2.pdf
+all: cover.jpg cover1.jpg bc0.pdf bc1.pdf bc2.pdf bc3.pdf
+
+examples: all
+	${SH} mkdir -p $@
+	${SH} cp *pdf $@
 
 %.pdf: %.tex spineWidth.tex
 	${SH} pdflatex -interaction=nonstopmode $< || true
