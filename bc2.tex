@@ -1,0 +1,101 @@
+\include{params.tex}
+\documentclass[
+               coverwidth=\TheBookWidth,
+               coverheight=\TheBookHeight,
+               spinewidth=\TheSpineWidth,
+               flapwidth=0cm,
+               wrapwidth=0mm,
+               bleedwidth=0.125in,
+               marklength=0mm,
+               markthick=0mm,
+              ]{bookcover}
+\usepackage[outline]{contour}
+\usepackage[most]{tcolorbox} % Load the advanced box package
+\usepackage{xcolor} 
+\usepackage{tikz}
+\usetikzlibrary{fadings}
+
+\definecolor{BookCoverColor}{RGB}{\BookCoverRGB}
+\definecolor{FontColor}{RGB}{\FontRGB}
+
+  %--------------------Components--------------------
+    \newtcolorbox{MyBox}[2]{
+        colback=#1,    
+        colframe=#2,           
+        fonttitle=\bfseries,   
+        arc=4mm               
+    }
+
+    \newbookcovercomponenttype{shadedBox}{
+      \begin{MyBox}{BookCoverColor}{FontColor}
+          #1
+      \end{MyBox}
+    }
+
+    \newbookcovercomponenttype{center rotate}{
+      \vfill
+      \centering
+      \rotatebox[origin=c]{-90}{#1}
+      \vfill
+    \includegraphics[width=\TheSpineWidth]{images/rebelLoon.png}\\[1cm]
+    }
+
+    \newcommand{\lineSeperator}[1]{
+      \noindent\begin{tikzpicture}
+        \fill[left color=white, right color=white, middle color=black] (0,0) rectangle (\linewidth, #1);
+      \end{tikzpicture}
+    }
+
+  %----------------------Parts-----------------------
+    \letnamebookcoverpart{titleBox}{front}[0mm,0.75\partheight,0mm,0mm]
+
+\begin{document}
+  \begin{bookcover}
+      \begin{bookcoverelement}{color}{bg whole}
+        BookCoverColor
+      \end{bookcoverelement}
+
+    %---front---
+%     \begin{bookcoverelement}{picture}{front}[0mm,0mm,0mm,0mm]
+%       \TheBookCoverImage
+%     \end{bookcoverelement}
+
+      \begin{bookcoverelement}{center}{front}[0mm,0.75\partheight,0mm,0mm]
+        \resizebox{!}{7mm}{\TheTitle}
+      \end{bookcoverelement}
+      \begin{bookcoverelement}{picture}{front}[0mm,7cm,0mm,0.25\partheight]
+        \TheBookCoverImage
+      \end{bookcoverelement}
+      \begin{bookcoverelement}{center}{front}[0mm,0mm,0mm,0.75\partheight]
+        \resizebox{!}{5mm}{\TheSubtitle}
+      \end{bookcoverelement}
+
+
+    %---spine---
+    \begin{bookcoverelement}{center rotate}{spine}
+      \color{FontColor}\huge\sffamily\bfseries
+      {\TheTitle; \TheSubtitle}
+    \end{bookcoverelement}
+
+
+    %---back----
+    \begin{bookcoverelement}{normal}{back}[2cm,2cm,2cm,2cm]
+      \centering {
+      \resizebox{!}{5mm}{\TheTitle}\\[8mm]
+      \resizebox{!}{3mm}{\TheSubtitle}\\
+      }
+      %--line seperator--
+      \lineSeperator{0.5pt}
+
+      \centering{
+        \color{FontColor}\TheDescription
+        \lineSeperator{0.25pt}
+        \color{FontColor}\TheAuthorBio
+      }
+    \end{bookcoverelement}
+
+
+
+  \end{bookcover}
+\end{document}
+
